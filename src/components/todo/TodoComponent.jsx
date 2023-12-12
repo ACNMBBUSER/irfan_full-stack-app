@@ -3,6 +3,7 @@ import { createTodoApi, retrieveTodoApi, updateTodoApi } from "./api/ToDoApiServ
 import { useAuth } from "./security/AuthContext"
 import { useEffect, useState } from "react"
 import {Formik, Form, Field, ErrorMessage} from 'formik'
+import moment from "moment/moment"
 
 export default function TodoComponent() {
     const {id} = useParams()
@@ -74,7 +75,7 @@ export default function TodoComponent() {
             errors.description = 'Enter atleast 5 characters'
         }
 
-        if(values.targetDate == null || values.targetDate == ''){
+        if(values.targetDate == null || values.targetDate == '' || moment(values.targetDate).isValid()){
             errors.targetDate = 'Enter a target date'
         }
 
